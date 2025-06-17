@@ -1,9 +1,55 @@
-import example.pepita
+import pacientesYAparatos.*
 
-describe "group of tests for pepita" {
+describe "test parte 1" {
 
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
+  const leonardo = new Paciente(edad=40, nivelDolor=10, nivelFortaleza=20)
+  const milena = new Paciente(edad=3, nivelDolor=30, nivelFortaleza=50)
+  const magneto1 = new Magneto()
+  const bicicleta1 = new Bicicleta()
+  const minitramp1 = new Minitramp()
+
+  test "Leonardo puede usar el magneto1" {
+    assert.that(leonardo.puedeUsar(magneto1))
   }
 
+  test "Leonardo puede usar el bicicleta1" {
+    assert.that(leonardo.puedeUsar(bicicleta1))
+  }
+
+  test "Leonardo puede usar el minitramp1" {
+    assert.that(leonardo.puedeUsar(minitramp1))
+  }
+
+  test "Milena puede usar el magneto1" {
+    assert.that(milena.puedeUsar(magneto1))
+  }
+
+  test "Milena no puede usar el bicicleta1" {
+    assert.notThat(milena.puedeUsar(bicicleta1))
+  }
+
+  test "Milena no puede usar el minitramp1" {
+    assert.notThat(milena.puedeUsar(minitramp1))
+  }
+
+  test "Leonardo usa el magneto1 y su nivel de dolor baja a 9" {
+    leonardo.usarAparato(magneto1)
+    assert.equals(9, leonardo.nivelDolor())
+  }
+
+  test "Milena usa el magneto1 y su nivel de dolor baja a 27" {
+    milena.usarAparato(magneto1)
+    assert.equals(27, milena.nivelDolor())
+  }
+
+  test "Leonardo usa el bicicleta1 y su nivel de dolor baja a 6, y su fortaleza sube a 23" {
+    leonardo.usarAparato(bicicleta1)
+    assert.equals(6, leonardo.nivelDolor())
+    assert.equals(23, leonardo.nivelFortaleza())
+  }
+
+  test "Leonardo usa el minitramp1 y su nivel de fortaleza sube a 24" {
+    leonardo.usarAparato(minitramp1)
+    assert.equals(24, leonardo.nivelFortaleza())
+  }
 }
